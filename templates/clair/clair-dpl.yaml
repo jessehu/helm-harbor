@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: clair
-        image: vmware/clair:v2.0.1-photon
+        image: {{ .Values.clair.image.repository }}:{{ .Values.clair.image.tag }}
+        imagePullPolicy: {{ .Values.clair.image.pullPolicy }}
         resources:
 {{ toYaml .Values.clair.resources | indent 10 }}        
         args: ["-insecure-tls", "-config", "/config/config.yaml"]

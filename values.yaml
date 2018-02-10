@@ -28,9 +28,14 @@
 persistence: 
   enabled: false
 
-externalDomain: harbor.192.168.99.100.xip.io
-## tls_crt, tls_key, ca_crt should match the domain above
+# The tag for Harbor docker images
+harbor_image_tag: &harbor_image_tag v1.4.0
 
+# Set to true if setting Harbor Registry as insecure-registries for docker
+insecureRegistry: false
+# Need to specify your own FQDN for Harbor
+externalDomain:
+# tls_crt, tls_key, ca_crt must match the externalDomain above
 tlsCrt: |
   -----BEGIN CERTIFICATE-----
   MIIDJDCCAgygAwIBAgIJAKNSg1jp3l2oMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
@@ -102,7 +107,7 @@ caCrt: |
 adminserver:
   image:
     repository: vmware/harbor-adminserver
-    tag: v1.3.0
+    tag: *harbor_image_tag
     pullPolicy: IfNotPresent
   emailHost: "smtp.mydomain.com"
   emailPort: "25"
@@ -110,6 +115,7 @@ adminserver:
   emailSsl: "false"
   emailFrom: "admin <sample_admin@mydomain.com>"
   emailIdentity: ""
+  emailInsecure: "False"
   key: not-a-secure-key
   emailPwd: not-a-secure-password
   harborAdminPassword: Harbor12345
@@ -129,7 +135,7 @@ adminserver:
 jobservice:
   image:
     repository: vmware/harbor-jobservice
-    tag: v1.3.0
+    tag: *harbor_image_tag
     pullPolicy: IfNotPresent
   key: not-a-secure-key
   secret: not-a-secure-secret
@@ -143,7 +149,7 @@ jobservice:
 ui:
   image:
     repository: vmware/harbor-ui
-    tag: v1.3.0
+    tag: *harbor_image_tag
     pullPolicy: IfNotPresent
   secret: not-a-secure-secret
   key: not-a-secure-key
@@ -211,7 +217,7 @@ ui:
 mysql:
   image:
     repository: vmware/harbor-db
-    tag: v1.3.0
+    tag: *harbor_image_tag
     pullPolicy: IfNotPresent
   # If left blank will use the included mysql service name.
   host: ~
@@ -231,8 +237,8 @@ mysql:
   
 registry:
   image:
-    repository: registry
-    tag: "2.6.2"
+    repository: vmware/registry-photon
+    tag: v2.6.2-v1.4.0
     pullPolicy: IfNotPresent
   httpSecret: not-a-secure-secret
   logLevel: 
@@ -297,6 +303,10 @@ registry:
 #
 clair:
   enabled: true
+  image:
+    repository: vmware/clair-photon
+    tag: v2.0.1-v1.4.0
+    pullPolicy: IfNotPresent
   postgresPassword: not-a-secure-password
 # resources:
 #  requests:

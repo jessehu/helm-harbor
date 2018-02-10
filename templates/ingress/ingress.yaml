@@ -14,7 +14,9 @@ spec:
   tls:
   - hosts:
     - "{{ .Values.externalDomain }}"
+{{ if not .Values.insecureRegistry }}
     secretName: "{{ template "harbor.fullname" . }}-ingress"
+{{ end }}
   rules:
   - host: "{{ .Values.externalDomain }}"
     http:

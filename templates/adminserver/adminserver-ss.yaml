@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta2
 kind: StatefulSet
 metadata:
-  name: "{{ template "harbor.fullname" . }}"
+  name: "{{ template "harbor.fullname" . }}-adminserver"
   labels:
     app: "{{ template "harbor.fullname" . }}-adminserver"
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"

@@ -1,7 +1,7 @@
 name: harbor
-version: 0.0.1
-appVersion: 1.3.0
-description: VMWare Enterprise Grade Docker Registry
+version: 0.1.0
+appVersion: 1.4.0
+description: VMWare Enterprise Grade Harbor Docker Registry
 keywords:
 - vmware
 - docker
