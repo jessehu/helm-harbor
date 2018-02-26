@@ -8,8 +8,9 @@ This chart installs and configures VMWare Harbor.
 
 ## Prerequisites
 
-- Kubernetes 1.7+ with Beta APIs enabled
+- Kubernetes cluster 1.8+ with Beta APIs enabled
 - Kubernetes Ingress Controller is enabled
+- kubectl CLI 1.8+
 - PV provisioner support in the underlying infrastructure
 
 ## Setup a Kubernetes cluster
@@ -56,12 +57,11 @@ Then add `"insecure-registries": ["harbor.my.domain"]` in the docker daemon conf
 
 ### Secure Registry Mode
 
-Generate Root CA and SSL certificate for your Harbor.
-You can use your own certificate or follow this [guide](https://datacenteroverlords.com/2012/03/01/creating-your-own-ssl-certificate-authority/)
-to create a self-signed certificate. The common name of the certificate must match your Harbor FQDN.
+By default this chart will generate a root CA and SSL certificate for your Harbor.
+You can also use your own CA signed certificate:
 
-Open values.yaml, set the value of 'externalDomain' to your Harbor FQDN, and
-set value of 'tlsCrt', 'tlsKey', 'caCrt' to the generated certificate.
+open values.yaml, set the value of 'externalDomain' to your Harbor FQDN, and
+set value of 'tlsCrt', 'tlsKey', 'caCrt'. The common name of the certificate must match your Harbor FQDN.
 
 Install the Harbor helm chart with a release name `my-release`:
 
@@ -93,12 +93,12 @@ The following tables lists the configurable parameters of the Harbor chart and t
 | Parameter                  | Description                        | Default                 |
 | -----------------------    | ---------------------------------- | ----------------------- |
 | **Harbor** |
-| `harbor_image_tag`     | The tag for Harbor docker images | `v1.4.0` |
-| `externalDomain`       | Harbor will run on (https://*externalDomain*/). Make sure this FQDN resolves to the K8s Ingress Controller IP. | undefined |
+| `harborImageTag`     | The tag for Harbor docker images | `v1.4.0` |
+| `externalDomain`       | Harbor will run on (https://*externalDomain*/). Make sure this FQDN resolves to the K8s Ingress Controller IP. | harbor.my.domain |
 | `insecureRegistry`     | Set to true if setting Harbor Registry as insecure-registries for docker | `false` |
-| `tlsCrt`               | TLS certificate to use for Harbor's https endpoint | see values.yaml |
-| `tlsKey`               | TLS key to use for Harbor's https endpoint | see values.yaml |
-| `caCrt`                | CA Cert for self signed TLS cert | see values.yaml |
+| `tlsCrt`               | TLS certificate to use for Harbor's https endpoint | auto-generated |
+| `tlsKey`               | TLS key to use for Harbor's https endpoint | auto-generated |
+| `caCrt`                | CA Cert for self signed TLS cert | auto-generated |
 | `persistence.enabled` | enable persistent data storage | `false` |
 | **Adminserver** |
 | `adminserver.image.repository` | Repository for adminserver image | `vmware/harbor-adminserver` |
