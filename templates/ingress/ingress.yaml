@@ -7,7 +7,6 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"    
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
     ingress.kubernetes.io/ssl-redirect: "true"
     ingress.kubernetes.io/body-size: "0"
     ingress.kubernetes.io/proxy-body-size: "0"
