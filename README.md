@@ -1,10 +1,8 @@
-# VMWare Harbor
+**IMPORTANT**: The Harbor Helm Chart repo has been moved to https://github.com/vmware/harbor/tree/master/contrib/helm/harbor, and will not update any more.
 
-[VMWare Harbor](http://vmware.github.io/harbor/) is an enterprise-class registry server that stores and distributes Docker images. Harbor extends the open source Docker Distribution by adding the functionalities usually required by an enterprise, such as security, identity and management. As an enterprise private registry, Harbor offers better performance and security. Having a registry closer to the build and run environment improves the image transfer efficiency. Harbor supports the setup of multiple registries and has images replicated between them. In addition, Harbor offers advanced security features, such as user management, access control and activity auditing.
+## Harbor Tile
 
-## Introduction
-
-This chart installs and configures VMWare Harbor.
+This chart installs [Harbor](http://vmware.github.io/harbor/).
 
 ## Prerequisites
 
@@ -174,6 +172,6 @@ helm install --name my-release -f /path/to/values.yaml .
 
 ## Persistence
 
-VMWare Harbor stores the data and configurations in emptyDir volumes. You can change the values.yaml to enable persistence and use a PersistentVolumeClaim instead.
+Harbor stores the data and configurations in emptyDir volumes. You can change the values.yaml to enable persistence and use a PersistentVolumeClaim instead.
 
 > *"An emptyDir volume is first created when a Pod is assigned to a Node, and exists as long as that Pod is running on that node. When a Pod is removed from a node for any reason, the data in the emptyDir is deleted forever."*
