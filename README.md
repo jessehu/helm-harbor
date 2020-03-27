@@ -1,4 +1,4 @@
-**IMPORTANT**: The Harbor Helm Chart repo has been moved to https://github.com/vmware/harbor/tree/master/contrib/helm/harbor, and will not update any more.
+**IMPORTANT**: This Harbor Helm Chart repo has been officially moved to https://github.com/goharbor/harbor-helm.
 
 ## Harbor Tile
 
